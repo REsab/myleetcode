@@ -1,6 +1,8 @@
 package com.resab.day1;
 
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -12,49 +14,9 @@ class Solution {
     public static void main(String[] args) {
 
 
-        System.out.println(firstUniqChar("fj"));
-        System.out.println(firstUniqChar("fj4osdfiuadfpcvuzvc"));
-        System.out.println(firstUniqChar("fjpqu40zxcvjvamz"));
-        System.out.println(firstUniqChar("fjcsdfarevzcxxv0zjcv"));
-        System.out.println(firstUniqChar("fj9/q774sdfagwqfaZXv9865v1f vb er "));
-
+        System.out.println(firstUniqChar("z"));
         String substring;
         int i;
-
-
-        substring = UUID.randomUUID().toString().replaceAll("-", "").substring(5);
-        i = firstUniqChar(substring);
-        System.out.println(substring + ": " + substring.substring(i, i + 1) + " ***index:" + i);
-
-
-
-        substring = UUID.randomUUID().toString().replaceAll("-", "").substring(5);
-        i = firstUniqChar(substring);
-        System.out.println(substring + ": " + substring.substring(i, i + 1) + " ***index:" + i);
-
-
-
-        substring = UUID.randomUUID().toString().replaceAll("-", "").substring(5);
-        i = firstUniqChar(substring);
-        System.out.println(substring + ": " + substring.substring(i, i + 1) + " ***index:" + i);
-
-
-
-        substring = UUID.randomUUID().toString().replaceAll("-", "").substring(5);
-        i = firstUniqChar(substring);
-        System.out.println(substring + ": " + substring.substring(i, i + 1) + " ***index:" + i);
-
-
-
-        substring = UUID.randomUUID().toString().replaceAll("-", "").substring(5);
-        i = firstUniqChar(substring);
-        System.out.println(substring + ": " + substring.substring(i, i + 1) + " ***index:" + i);
-
-
-
-        substring = UUID.randomUUID().toString().replaceAll("-", "").substring(5);
-        i = firstUniqChar(substring);
-        System.out.println(substring + ": " + substring.substring(i, i + 1) + " ***index:" + i);
 
 
     }
@@ -62,6 +24,8 @@ class Solution {
     /**
      * 用两次循环
      * 在内循环做判断
+     * <p>
+     * bug 最后一个判断 失败
      *
      * @param s
      * @return
@@ -69,6 +33,10 @@ class Solution {
     public static int firstUniqChar(String s) {
 
         char[] chars = s.toCharArray();
+
+        if (chars.length == 1) {
+            return 0;
+        }
 
         for (int i = 0; i < chars.length; i++) {
             char aChar = chars[i];
@@ -88,4 +56,25 @@ class Solution {
         return -1;
 
     }
+
+    public static int firstUniqChar(String s, boolean isAnswer) {
+        Map<Character, Integer> frequency = new HashMap<Character, Integer>();
+        for (int i = 0; i < s.length(); ++i) {
+            char ch = s.charAt(i);
+            frequency.put(ch, frequency.getOrDefault(ch, 0) + 1);
+        }
+        for (int i = 0; i < s.length(); ++i) {
+            if (frequency.get(s.charAt(i)) == 1) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+//        作者：LeetCode-Solution
+//        链接：https://leetcode-cn.com/problems/first-unique-character-in-a-string/solution/zi-fu-chuan-zhong-de-di-yi-ge-wei-yi-zi-x9rok/
+//        来源：力扣（LeetCode）
+//        著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+
 }
