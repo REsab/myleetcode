@@ -1,4 +1,4 @@
-package com.resab.com.resab.day1;
+package com.resab.day1;
 
 
 import java.util.UUID;
